@@ -9,7 +9,7 @@ class Booking {
 
     /**
      * aku lai
-     * 
+     * jhgjhjgjg
      * @passenggerName nama penumpang
      * @filght penerbangan
      * @setClass set tipe Kelas yang ada
