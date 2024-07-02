@@ -8,7 +8,7 @@ class Booking {
     String paymentType;
 
     /**
-     * aku lai
+     * oke bang
      * jhgjhjgjg
      * @passenggerName nama penumpang
      * @filght penerbangan
