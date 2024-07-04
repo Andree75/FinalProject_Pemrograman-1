@@ -92,7 +92,7 @@ public class AirlineReservationSystem {
     public static void main(String[] args) throws InterruptedException {
         boolean close = false;
 
-       // Login();
+       //Login();
 
         while (!close) {
             showMenu();
@@ -252,6 +252,7 @@ public class AirlineReservationSystem {
                     bookings[flightIndex][classIndex][i] = new Booking(name, flights[flightIndex],
                             getSeatClass(classChoice), price, paymentType);
                     seatsAvailable[flightIndex][classIndex]--;
+            
                     System.out.printf(
                             "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Tipe Pembayaran: %s",
                             name, flights[flightIndex], getSeatClass(classChoice), price, paymentType);
@@ -263,7 +264,7 @@ public class AirlineReservationSystem {
             System.out.println("Maaf, kursi untuk kelas yang Anda pilih tidak tersedia di Rute Penerbangan ini");
             System.out.println();
         } else {
-            System.out.println("Maaf, kursi sudah penuh untuk kelas ini.");
+            System.out.println("Maaf, kursi sudah penuh untuk kelas ini silahkan pilih kelas yang lain.");
             System.out.println();
         }
     }
@@ -338,7 +339,7 @@ public class AirlineReservationSystem {
                     }
                 }
                 System.out.println(
-                        "\t------------------------   ||  -------------------------  ||  -----------------------");
+                        "\t------------------------   ||  -------------------------  ||  -----------------------saya");
             }
             System.out.println();
         }
@@ -450,14 +451,19 @@ public class AirlineReservationSystem {
         int maxTries = 3;
         int indikator = 0;
 
-        System.out.println("\t\t\t<<<=LOGIN PAGE=>>>");
+        System.out.println("+==========================+");
+        System.out.println("||   <<<=LOGIN PAGE=>>>   ||");
+        System.out.println("+==========================+");
         System.out.println();
         do {
-            System.out.print("Enter username: ");
+            System.out.println("+================+");
+            System.out.print(" Enter username: ");
             String username = input.nextLine();
             System.out.println();
+            System.out.println("+================+");
             System.out.print("Enter password: ");
             String password = input.nextLine();
+            System.out.println();
 
             boolean isAuthenticated = false;
             for (int i = 0; i < validUsernames.length; i++) {
@@ -472,15 +478,18 @@ public class AirlineReservationSystem {
                     System.out.print("|");
                     Thread.sleep(11);
                 }
+                System.out.println();
                 System.out.println("\n\t\t\t" + password + " Berhasil Login");
                 indikator = 1;
                 System.out.println();
             } else {
                 tries++;
                 for (int i = 0; i < 120; i++) {
+                    System.out.println();
                     System.out.print("|");
                     Thread.sleep(12);
                 }
+                System.out.println();
                 System.out.println("\n\t\t\t\tUsername atau Password yang di Inputkan salah. Coba Lagi");
                 System.out.println();
 
