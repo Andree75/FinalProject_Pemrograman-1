@@ -92,7 +92,7 @@ public class AirlineReservationSystem {
     public static void main(String[] args) throws InterruptedException {
         boolean close = false;
 
-        Login();
+       // Login();
 
         while (!close) {
             showMenu();
@@ -173,8 +173,11 @@ public class AirlineReservationSystem {
      */
     public static void searchFlights() {
         System.out.println();
-        System.out.println("<<= Cari Penerbangan =>>");
-        System.out.print("Masukkan nama Daerah yang akan anda tuju (ex: Surabaya): ");
+        System.out.println("+==========================+");
+        System.out.println("||<<= Cari Penerbangan =>>||");
+        System.out.println("+==========================+");
+        System.out.println("+============================================================+");
+        System.out.print("  Masukkan nama Daerah yang akan anda tuju (ex: Surabaya): ");
         String destination = input.nextLine().toLowerCase();
         System.out.println();
 
@@ -182,7 +185,7 @@ public class AirlineReservationSystem {
         for (int i = 0; i < flights.length; i++) {
             if (flights[i].toLowerCase().contains(destination)) {
                 System.out.println(
-                        "+====+=======================================================================================================");
+                        "+====+===============================================================================================================");
                 System.out.println("||" + (i + 1) + "|| " + flights[i] +
                         " (Kuota First Class Tersedia: " + seatsAvailable[i][0] +
                         ", Kuota Bisnis Tersedia: " + seatsAvailable[i][1] +
@@ -211,7 +214,9 @@ public class AirlineReservationSystem {
     public static void bookTicket() throws InterruptedException {
 
         System.out.println();
-        System.out.println("<<<= Pemesanan Tiket =>>>");
+        System.out.println("+===========================+");
+        System.out.println("||<<<= Pemesanan Tiket =>>>||");
+        System.out.println("+===========================+");
         showFlights();
         System.out.println();
         System.out.print(">> Pilih penerbangan (1-15): ");
@@ -271,8 +276,11 @@ public class AirlineReservationSystem {
      */
     public static void cancelTicket() throws InterruptedException {
         System.out.println();
-        System.out.println("\t\t\t\t<<<= Pembatalan Tiket =>>>");
-        System.out.print("Masukkan nama Anda: ");
+        System.out.println("+============================+");
+        System.out.println("||<<<= Pembatalan Tiket =>>>||");
+        System.out.println("+============================+");
+        System.out.println("+=====================+");
+        System.out.print(" Masukkan nama Anda: ");
         String name = input.nextLine();
         System.out.println();
 
