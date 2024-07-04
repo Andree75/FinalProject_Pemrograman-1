@@ -92,7 +92,7 @@ public class AirlineReservationSystem {
     public static void main(String[] args) throws InterruptedException {
         boolean close = false;
 
-       //Login();
+       Login();
 
         while (!close) {
             showMenu();
@@ -339,7 +339,7 @@ public class AirlineReservationSystem {
                     }
                 }
                 System.out.println(
-                        "\t------------------------   ||  -------------------------  ||  -----------------------saya");
+                        "\t------------------------   ||  -------------------------  ||  -----------------------");
             }
             System.out.println();
         }
