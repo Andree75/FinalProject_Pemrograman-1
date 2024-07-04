@@ -15,7 +15,7 @@ class Booking {
      * @setClass set tipe Kelas yang ada
      * @price harga penerbangan
      * @paymentType untuk metode pembayaran
-     * 
+     * @serialData cobaa
      */
 
     public Booking(String passengerName, String flight, String seatClass, double price, String paymentType) {
@@ -92,7 +92,7 @@ public class AirlineReservationSystem {
     public static void main(String[] args) throws InterruptedException {
         boolean close = false;
 
-       // Login();
+        // Login();
 
         while (!close) {
             showMenu();
