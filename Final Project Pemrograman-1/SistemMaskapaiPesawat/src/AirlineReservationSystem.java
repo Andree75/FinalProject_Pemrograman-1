@@ -15,7 +15,7 @@ class Booking {
      * @setClass set tipe Kelas yang ada
      * @price harga penerbangan
      * @paymentType untuk metode pembayaran
-     * 
+     * @paymentttt cobaa
      */
 
     public Booking(String passengerName, String flight, String seatClass, double price, String paymentType) {
@@ -92,7 +92,7 @@ public class AirlineReservationSystem {
     public static void main(String[] args) throws InterruptedException {
         boolean close = false;
 
-       Login();
+        Login();
 
         while (!close) {
             showMenu();
@@ -252,7 +252,7 @@ public class AirlineReservationSystem {
                     bookings[flightIndex][classIndex][i] = new Booking(name, flights[flightIndex],
                             getSeatClass(classChoice), price, paymentType);
                     seatsAvailable[flightIndex][classIndex]--;
-            
+
                     System.out.printf(
                             "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Tipe Pembayaran: %s",
                             name, flights[flightIndex], getSeatClass(classChoice), price, paymentType);
