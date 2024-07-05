@@ -367,10 +367,11 @@ public class AirlineReservationSystem {
 
     // Method untuk menghitung harga tiket berdasarkan kelas
     /**
+     * @calculatePrice jadi di methods ini berfungsi untuk menhitung harga tiket penerbangan 
      * 
      * @param flightIndex : Rute Penerbangan
      * @param classChoice : Pilihan kelas
-     * @basePrice Harga Dasar
+     * @basePrice Harga Dasar untuk semua penerbangan
      * @layananBisnis addon pelayanan pada Kelas Bisnis
      * @layananPremium addon pelayanan pada First Class
      */
