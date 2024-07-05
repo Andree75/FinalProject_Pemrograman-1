@@ -442,7 +442,16 @@ public class AirlineReservationSystem {
                 return basePrice;
         }
     }
-
+    /**
+     * @login methods ini berfungsi untuk menampilkan login dan login ini berfungsi untuk memasuki aplikasi ini
+     * 
+     * @tries berfungsi untuk perulangan dan untuk menampilkan fungsi loading
+     * @maxTries untuk indikator berapa kali anda bisa memasukan password ketika anda salah
+     * @indikator menjadi indikator ketikan benar login bisa masuk ke menu utama 
+     * @isAuthenticated fungsi untuk mengetahui login ini benar atau salah
+     * 
+     * @throws InterruptedException
+     */
     @SuppressWarnings("resource")
     public static void Login() throws InterruptedException {
 
