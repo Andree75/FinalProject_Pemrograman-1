@@ -1,30 +1,28 @@
 import java.util.Scanner;
 
-class Booking {
+class Reservasi {
     String passengerName;
-    String flight;
-    String seatClass;
-    double price;
-    String paymentType;
+    String rutePenerbangan;
+    String setKelas;
+    double harga;
+    String metodePembayaran;
 
     /**
-     * 
-     * skldfhb;ksdnf
-     * 
      * @passenggerName nama penumpang
-     * @filght penerbangan
-     * @setClass set tipe Kelas yang ada
-     * @price harga penerbangan
-     * @paymentType untuk metode pembayaran
+     * @rutePenerbangan rute penerbangan yang disediakan
+     * @setKelas set tipe Kelas yang ada
+     * @harga harga penerbangan
+     * @tipePembayaran untuk metode pembayaran
      */
 
-    public Booking(String passengerName, String flight, String seatClass, double price, String paymentType) {
+    public Reservasi(String passengerName, String rutePenerbangan, String setKelas, double harga,
+            String metodePembayaran) {
 
         this.passengerName = passengerName;
-        this.flight = flight;
-        this.seatClass = seatClass;
-        this.price = price;
-        this.paymentType = paymentType;
+        this.rutePenerbangan = rutePenerbangan;
+        this.setKelas = setKelas;
+        this.harga = harga;
+        this.metodePembayaran = metodePembayaran;
 
     }
 
@@ -36,10 +34,10 @@ class Booking {
      */
     @Override
     public String toString() {
-        return String.format("Nama: %s | Penerbangan: %s | Kelas: %s | Harga: Rp%,.2f| Tipe Pembayaran: %s",
-                passengerName, flight,
-                seatClass,
-                price, paymentType);
+        return String.format("Nama: %s | Penerbangan: %s | Kelas: %s | Harga: Rp%,.2f| metode Pembayaran dengan %s",
+                passengerName, rutePenerbangan,
+                setKelas,
+                harga, metodePembayaran);
     }
 }
 
@@ -48,31 +46,33 @@ public class AirlineReservationSystem {
     static Scanner input = new Scanner(System.in);
 
     /**
-     * @flights untuk menyimpan rute penerbangan yang tersedia
-     * 
+     * @rutePenerbangan untuk menyimpan rute penerbangan yang tersedia
      */
     // Array untuk menyimpan penerbangan yang tersedia
-    static String[] flights = { "Jakarta - Denpasar", "Jakarta - Surabaya", "Jakarta - Medan", "Surabaya - Makassar",
+    static String[] rutePenerbangan = { "Jakarta - Denpasar", "Jakarta - Surabaya", "Jakarta - Medan",
+            "Surabaya - Makassar",
             "Medan - Denpasar", "Banda Aceh - Jakarta", "Surabaya - Lombok", "Balikpapan - Surabaya",
             "Surabaya - Manado",
             "Surabaya - Kupang", "Papua - Banda Aceh", "Jakarta - Lombok", "Batam - Padang", "Denpasar - Yogyakarta",
             "Jakarta - Banda Aceh" };
 
     /**
-     * @setsAvailable untuk menyimpan data kursi perkelas yang tersedia di masing2
+     * @kelasTersedia untuk menyimpan data kursi perkelas yang tersedia di masing2
      *                rute penerbangan
      * 
      */
-    static int[][] seatsAvailable = { { 2, 4, 5 }, { 3, 6, 6 }, { 3, 2, 6 }, { 2, 5, 5 }, { 3, 5, 6 },
+    static int[][] kelasTersedia = { { 2, 4, 5 }, { 3, 6, 6 }, { 3, 2, 6 }, { 2, 5, 5 }, { 3, 5, 6 },
             { 1, 3, 6 }, { 2, 6, 5 }, { 2, 1, 6 }, { 3, 4, 5 }, { 0, 1, 6 }, { 0, 2, 5 }, { 0, 3, 0 },
             { 0, 2, 6 }, { 4, 6, 6 }, { 0, 3, 6 } }; // Kursi tersedia untuk masing-masing kelas (First Class, Bisnis,
                                                      // Ekonomi)
 
     /**
-     * @booking untuk menyimpan rute penerbangan, kelas penerbangan, maksimal per
-     *          kelas menampung 6 kuota
+     * @reservasiUser untuk menyimpan rute penerbangan, kelas penerbangan, maksimal
+     *                per
+     *                kelas menampung 6 kuota
      */
-    static Booking[][][] bookings = new Booking[15][3][6]; // Menyimpan data pemesan berdasarkan penerbangan dan kelas
+    static Reservasi[][][] reservasiUser = new Reservasi[15][3][6]; // Menyimpan data pemesan berdasarkan penerbangan
+                                                                    // dan kelas
 
     /**
      * @validUsername untuk menyimpan data username login
@@ -156,13 +156,13 @@ public class AirlineReservationSystem {
         System.out.println(
                 "+====================================================================================================================+");
         System.out.println();
-        for (int i = 0; i < flights.length; i++) {
+        for (int i = 0; i < rutePenerbangan.length; i++) {
             System.out.println(
                     "+====+===============================================================================================================");
-            System.out.println("|| " + (i + 1) + " || " + flights[i] +
-                    " (Kuota First Class Tersedia: " + seatsAvailable[i][0] +
-                    ", Kuota Bisnis Tersedia: " + seatsAvailable[i][1] +
-                    ", Kuota Ekonomi Tersedia: " + seatsAvailable[i][2] + ")");
+            System.out.println("|| " + (i + 1) + " || " + rutePenerbangan[i] +
+                    " (Kuota First Class Tersedia: " + kelasTersedia[i][0] +
+                    ", Kuota Bisnis Tersedia: " + kelasTersedia[i][1] +
+                    ", Kuota Ekonomi Tersedia: " + kelasTersedia[i][2] + ")");
 
         }
     }
@@ -182,14 +182,14 @@ public class AirlineReservationSystem {
         System.out.println();
 
         boolean found = false;
-        for (int i = 0; i < flights.length; i++) {
-            if (flights[i].toLowerCase().contains(destination)) {
+        for (int i = 0; i < rutePenerbangan.length; i++) {
+            if (rutePenerbangan[i].toLowerCase().contains(destination)) {
                 System.out.println(
                         "+====+===============================================================================================================");
-                System.out.println("||" + (i + 1) + "|| " + flights[i] +
-                        " (Kuota First Class Tersedia: " + seatsAvailable[i][0] +
-                        ", Kuota Bisnis Tersedia: " + seatsAvailable[i][1] +
-                        ", Kuota Ekonomi Tersedia: " + seatsAvailable[i][2] + ")");
+                System.out.println("||" + (i + 1) + "|| " + rutePenerbangan[i] +
+                        " (Kuota First Class Tersedia: " + kelasTersedia[i][0] +
+                        ", Kuota Bisnis Tersedia: " + kelasTersedia[i][1] +
+                        ", Kuota Ekonomi Tersedia: " + kelasTersedia[i][2] + ")");
                 found = true;
             }
         }
@@ -200,16 +200,16 @@ public class AirlineReservationSystem {
 
     // Method untuk memesan tiket
     /**
-     * @flightChoice memilih Rute penerbangan dalam Array
-     * @flightIndex menampilkan inputan Pemesan agar sesuai dengan Array Rute
+     * @pilihPenerbangan memilih Rute penerbangan dalam Array
+     * @indeksPenerbangan menampilkan inputan Pemesan agar sesuai dengan Array Rute
+     *                    Penerbangan
+     * @pilihKelas memilih Tipe kelas di Rute Penerbangan
+     * @indeksKelas menampilkan inputan Pemesan agar sesuai dengan Array Kelas
      *              Penerbangan
-     * @classChoice memilih Tipe kelas di Rute Penerbangan
-     * @classIndex menampilkan inputan Pemesan agar sesuai dengan Array Kelas
-     *             Penerbangan
      * @name meminta inputan Nama Pemesan
-     * @price menyimpan nilai harga tiket di method bookTicket()
-     * @paymentType menyimpan nilai pada method tipe pembayaran di method
-     *              bookTicket()
+     * @harga menyimpan nilai harga tiket di method bookTicket()
+     * @metodePembayaran menyimpan nilai pada method tipe pembayaran di method
+     *                   bookTicket()
      */
     public static void bookTicket() throws InterruptedException {
 
@@ -220,47 +220,49 @@ public class AirlineReservationSystem {
         showFlights();
         System.out.println();
         System.out.print(">> Pilih penerbangan (1-15): ");
-        int flightChoice = input.nextInt();
+        int pilihPenerbangan = input.nextInt();
         input.nextLine(); // Clear the newline
 
-        if (flightChoice < 1 || flightChoice > 15) {
+        if (pilihPenerbangan < 1 || pilihPenerbangan > 15) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             return;
         }
 
-        int flightIndex = flightChoice - 1;
+        int indeksPenerbangan = pilihPenerbangan - 1;
 
         System.out.print("\n >> 1. First Class \n >> 2. Bisnis \n >> 3. Ekonomi \n\nPilih Kelas: ");
-        int classChoice = input.nextInt();
+        int pilihKelas = input.nextInt();
         input.nextLine(); // Clear the newline
 
-        if (classChoice < 1 || classChoice > 3) {
+        if (pilihKelas < 1 || pilihKelas > 3) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             return;
         }
 
-        int classIndex = classChoice - 1;
-        if (seatsAvailable[flightIndex][classIndex] > 0) {
+        int indeksKelas = pilihKelas - 1;
+        if (kelasTersedia[indeksPenerbangan][indeksKelas] > 0) {
             System.out.print("Masukkan nama Pemesan: ");
             String name = input.nextLine();
 
-            double price = calculatePrice(flightIndex, classChoice);
-            String paymentType = getPaymentTypeName(processPayment(price));
+            double harga = calculatePrice(indeksPenerbangan, pilihKelas);
+            String metodePembayaran = metodePembayaran(prosesPembayaran(harga));
 
-            for (int i = 0; i < bookings[flightIndex][classIndex].length; i++) {
-                if (bookings[flightIndex][classIndex][i] == null) {
-                    bookings[flightIndex][classIndex][i] = new Booking(name, flights[flightIndex],
-                            getSeatClass(classChoice), price, paymentType);
-                    seatsAvailable[flightIndex][classIndex]--;
+            for (int i = 0; i < reservasiUser[indeksPenerbangan][indeksKelas].length; i++) {
+                if (reservasiUser[indeksPenerbangan][indeksKelas][i] == null) {
+                    reservasiUser[indeksPenerbangan][indeksKelas][i] = new Reservasi(name,
+                            rutePenerbangan[indeksPenerbangan],
+                            kelasPenerbangan(pilihKelas), harga, metodePembayaran);
+                    kelasTersedia[indeksPenerbangan][indeksKelas]--;
 
                     System.out.printf(
                             "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Tipe Pembayaran: %s",
-                            name, flights[flightIndex], getSeatClass(classChoice), price, paymentType);
+                            name, rutePenerbangan[indeksPenerbangan], kelasPenerbangan(pilihKelas), harga,
+                            metodePembayaran);
                     System.out.println("\n");
                     break;
                 }
             }
-        } else if (seatsAvailable[flightIndex][classIndex] == 0) {
+        } else if (kelasTersedia[indeksPenerbangan][indeksKelas] == 0) {
             System.out.println("Maaf, kursi untuk kelas yang Anda pilih tidak tersedia di Rute Penerbangan ini");
             System.out.println();
         } else {
@@ -281,7 +283,7 @@ public class AirlineReservationSystem {
         System.out.println("||<<<= Pembatalan Tiket =>>>||");
         System.out.println("+============================+");
         System.out.println("+=====================+");
-        System.out.print(" Masukkan nama Anda: ");
+        System.out.print(" Masukkan nama Pemesan yang akan membatalkan Reservasi-nya: ");
         String name = input.nextLine();
         System.out.println();
 
@@ -291,14 +293,15 @@ public class AirlineReservationSystem {
         }
 
         boolean found = false;
-        for (int i = 0; i < flights.length; i++) {
-            for (int j = 0; j < bookings[i].length; j++) {
-                for (int k = 0; k < bookings[i][j].length; k++) {
-                    if (bookings[i][j][k] != null && bookings[i][j][k].passengerName.equalsIgnoreCase(name)) {
-                        System.out.println("\n\nTiket atas nama " + name + " Rute penerbangan " + flights[i] + " kelas "
-                                + getSeatClass(j + 1) + " berhasil dibatalkan.");
-                        bookings[i][j][k] = null;
-                        seatsAvailable[i][j]++;
+        for (int i = 0; i < rutePenerbangan.length; i++) {
+            for (int j = 0; j < reservasiUser[i].length; j++) {
+                for (int k = 0; k < reservasiUser[i][j].length; k++) {
+                    if (reservasiUser[i][j][k] != null && reservasiUser[i][j][k].passengerName.equalsIgnoreCase(name)) {
+                        System.out.println(
+                                "\n\nTiket atas nama " + name + " Rute penerbangan " + rutePenerbangan[i] + " kelas "
+                                        + kelasPenerbangan(j + 1) + " berhasil dibatalkan.");
+                        reservasiUser[i][j][k] = null;
+                        kelasTersedia[i][j]++;
                         found = true;
                         break;
                     }
@@ -323,19 +326,19 @@ public class AirlineReservationSystem {
                 "+===============================================================================================+");
         System.out.println();
 
-        for (int i = 0; i < flights.length; i++) {
+        for (int i = 0; i < rutePenerbangan.length; i++) {
             System.out.println(
                     "+==============================================================================================");
-            System.out.println("+) Penerbangan: " + flights[i]);
+            System.out.println("+) Penerbangan: " + rutePenerbangan[i]);
             System.out.println(
                     "+==============================================================================================");
-            for (int j = 0; j < bookings[i].length; j++) {
+            for (int j = 0; j < reservasiUser[i].length; j++) {
 
-                System.out.println("=>> Kelas " + getSeatClass(j + 1) + ": ");
+                System.out.println("=>> Kelas " + kelasPenerbangan(j + 1) + ": ");
 
-                for (int k = 0; k < bookings[i][j].length; k++) {
-                    if (bookings[i][j][k] != null) {
-                        System.out.println("\t" + (k + 1) + ". " + bookings[i][j][k]);
+                for (int k = 0; k < reservasiUser[i][j].length; k++) {
+                    if (reservasiUser[i][j][k] != null) {
+                        System.out.println("\t" + (k + 1) + ". " + reservasiUser[i][j][k]);
                     }
                 }
                 System.out.println(
@@ -352,7 +355,7 @@ public class AirlineReservationSystem {
      *                    2. Bisnis
      *                    3. Ekonomi
      */
-    public static String getSeatClass(int classChoice) {
+    public static String kelasPenerbangan(int classChoice) {
         switch (classChoice) {
             case 1:
                 return "First class";
@@ -367,7 +370,8 @@ public class AirlineReservationSystem {
 
     // Method untuk menghitung harga tiket berdasarkan kelas
     /**
-     * @calculatePrice jadi di methods ini berfungsi untuk menhitung harga tiket penerbangan 
+     * @calculatePrice jadi di methods ini berfungsi untuk menhitung harga tiket
+     *                 penerbangan
      * 
      * @param flightIndex : Rute Penerbangan
      * @param classChoice : Pilihan kelas
@@ -442,12 +446,15 @@ public class AirlineReservationSystem {
                 return basePrice;
         }
     }
+
     /**
-     * @login methods ini berfungsi untuk menampilkan login dan login ini berfungsi untuk memasuki aplikasi ini
+     * @login methods ini berfungsi untuk menampilkan login dan login ini berfungsi
+     *        untuk memasuki aplikasi ini
      * 
      * @tries berfungsi untuk perulangan dan untuk menampilkan fungsi loading
-     * @maxTries untuk indikator berapa kali anda bisa memasukan password ketika anda salah
-     * @indikator menjadi indikator ketikan benar login bisa masuk ke menu utama 
+     * @maxTries untuk indikator berapa kali anda bisa memasukan password ketika
+     *           anda salah
+     * @indikator menjadi indikator ketikan benar login bisa masuk ke menu utama
      * @isAuthenticated fungsi untuk mengetahui login ini benar atau salah
      * 
      * @throws InterruptedException
@@ -514,8 +521,8 @@ public class AirlineReservationSystem {
 
     // Method untuk memproses pembayaran
 
-    public static String getPaymentTypeName(int paymentChoice) {
-        switch (paymentChoice) {
+    public static String metodePembayaran(int pilihanPembayaran) {
+        switch (pilihanPembayaran) {
             case 1:
                 return "Kartu Kredit";
             case 2:
@@ -529,7 +536,7 @@ public class AirlineReservationSystem {
         }
     }
 
-    public static int processPayment(double amount) throws InterruptedException {
+    public static int prosesPembayaran(double amount) throws InterruptedException {
         System.out.println();
         System.out.println(">> Pilih Tipe Pembayaran:\n");
         System.out.println("1. Kartu Kredit");
@@ -537,10 +544,10 @@ public class AirlineReservationSystem {
         System.out.println("3. Transfer Bank");
         System.out.println("4. E-Wallet\n");
         System.out.print("Pilih metode pembayaran: ");
-        int paymentChoice = input.nextInt();
+        int pilihPembayaran = input.nextInt();
         input.nextLine(); // Clear the newline
 
-        switch (paymentChoice) {
+        switch (pilihPembayaran) {
             case 1:
                 processCreditCardPayment(amount);
                 break;
@@ -555,10 +562,10 @@ public class AirlineReservationSystem {
                 break;
             default:
                 System.out.println("Metode pembayaran tidak valid. Silakan coba lagi.");
-                processPayment(amount);
+                prosesPembayaran(amount);
                 break;
         }
-        return paymentChoice;
+        return pilihPembayaran;
     }
 
     @SuppressWarnings("unused")
