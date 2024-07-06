@@ -6,6 +6,7 @@ class Reservasi {
     String setKelas;
     double harga;
     String metodePembayaran;
+    String tanggalKeberangkatan;
 
     /**
      * @passenggerName nama penumpang
@@ -16,13 +17,14 @@ class Reservasi {
      */
 
     public Reservasi(String passengerName, String rutePenerbangan, String setKelas, double harga,
-            String metodePembayaran) {
+            String metodePembayaran, String tanggalKeberangkatan) {
 
         this.passengerName = passengerName;
         this.rutePenerbangan = rutePenerbangan;
         this.setKelas = setKelas;
         this.harga = harga;
         this.metodePembayaran = metodePembayaran;
+        this.tanggalKeberangkatan = tanggalKeberangkatan;
 
     }
 
@@ -34,8 +36,9 @@ class Reservasi {
      */
     @Override
     public String toString() {
-        return String.format("Nama: %s | Penerbangan: %s | Kelas: %s | Harga: Rp%,.2f| metode Pembayaran dengan %s",
-                passengerName, rutePenerbangan,
+        return String.format(
+                "Nama: %s | Penerbangan: %s | tanggal Keberangkatan: %s| Kelas: %s | Harga: Rp%,.2f \n\t | Metode Pembayaran dengan %s",
+                passengerName, rutePenerbangan, tanggalKeberangkatan,
                 setKelas,
                 harga, metodePembayaran);
     }
@@ -73,6 +76,11 @@ public class AirlineReservationSystem {
      */
     static Reservasi[][][] reservasiUser = new Reservasi[15][3][6]; // Menyimpan data pemesan berdasarkan penerbangan
                                                                     // dan kelas
+
+    /**
+     * @tanggalKeberangkatan Tanggal Keberangkatan Pemesan di Rute Penerbangan
+     */
+    static String tanggalKeberangkatan;
 
     /**
      * @validUsername untuk menyimpan data username login
@@ -244,6 +252,9 @@ public class AirlineReservationSystem {
             System.out.print("Masukkan nama Pemesan: ");
             String name = input.nextLine();
 
+            System.out.print("masukkan tanggal Keberangkatan Pemesan (hari/bulan/tahun): ");
+            tanggalKeberangkatan = input.nextLine();
+
             double harga = calculatePrice(indeksPenerbangan, pilihKelas);
             String metodePembayaran = metodePembayaran(prosesPembayaran(harga));
 
@@ -251,12 +262,13 @@ public class AirlineReservationSystem {
                 if (reservasiUser[indeksPenerbangan][indeksKelas][i] == null) {
                     reservasiUser[indeksPenerbangan][indeksKelas][i] = new Reservasi(name,
                             rutePenerbangan[indeksPenerbangan],
-                            kelasPenerbangan(pilihKelas), harga, metodePembayaran);
+                            kelasPenerbangan(pilihKelas), harga, metodePembayaran, tanggalKeberangkatan);
                     kelasTersedia[indeksPenerbangan][indeksKelas]--;
 
                     System.out.printf(
-                            "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Metode Pembayaran: %s",
-                            name, rutePenerbangan[indeksPenerbangan], kelasPenerbangan(pilihKelas), harga,
+                            "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Waktu tanggal Keberangkatan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Metode Pembayaran: %s",
+                            name, rutePenerbangan[indeksPenerbangan], tanggalKeberangkatan,
+                            kelasPenerbangan(pilihKelas), harga,
                             metodePembayaran);
                     System.out.println("\n");
                     break;
@@ -294,16 +306,20 @@ public class AirlineReservationSystem {
 
         boolean found = false;
         for (int i = 0; i < rutePenerbangan.length; i++) {
-            for (int j = 0; j < reservasiUser[i].length; j++) {
-                for (int k = 0; k < reservasiUser[i][j].length; k++) {
-                    if (reservasiUser[i][j][k] != null && reservasiUser[i][j][k].passengerName.equalsIgnoreCase(name)) {
-                        System.out.println(
-                                "\n\nTiket atas nama " + name + " Rute penerbangan " + rutePenerbangan[i] + " kelas "
-                                        + kelasPenerbangan(j + 1) + " berhasil dibatalkan.");
-                        reservasiUser[i][j][k] = null;
-                        kelasTersedia[i][j]++;
-                        found = true;
-                        break;
+            for (int j = 0; j < tanggalKeberangkatan.length(); j++) {
+                for (int k = 0; k < reservasiUser[i].length; k++) {
+                    for (int l = 0; l < reservasiUser[i][k].length; l++) {
+                        if (reservasiUser[i][k][l] != null
+                                && reservasiUser[i][k][l].passengerName.equalsIgnoreCase(name)) {
+                            System.out.println(
+                                    "\n\nTiket atas nama " + name + " | Rute penerbangan " + rutePenerbangan[i]
+                                            + " | kelas " + kelasPenerbangan(k + 1) + " | Waktu Keberangkatan "
+                                            + tanggalKeberangkatan + ", Berhasil dibatalkan.");
+                            reservasiUser[i][k][l] = null;
+                            kelasTersedia[i][k]++;
+                            found = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -311,7 +327,7 @@ public class AirlineReservationSystem {
         if (!found) {
             System.out.println();
             System.out.println();
-            System.out.println("Tiket tidak ditemukan untuk nama tersebut.");
+            System.out.println("Tiket tidak ditemukan atas nama tersebut.");
         }
     }
 
@@ -502,7 +518,6 @@ public class AirlineReservationSystem {
             } else {
                 tries++;
                 for (int i = 0; i < 120; i++) {
-                    System.out.println();
                     System.out.print("|");
                     Thread.sleep(12);
                 }
@@ -646,7 +661,6 @@ public class AirlineReservationSystem {
      * @param amount besaran biaya di masing-masing Metode Pembayaran
      * @ewalletId ID E-wallet dari Pemesan
      */
-    @SuppressWarnings("unused")
     public static void processEWalletPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan ID E-Wallet: ");
         String ewalletId = input.nextLine();
