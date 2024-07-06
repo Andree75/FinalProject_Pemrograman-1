@@ -12,7 +12,7 @@ class Reservasi {
      * @rutePenerbangan rute penerbangan yang disediakan
      * @setKelas set tipe Kelas yang ada
      * @harga harga penerbangan
-     * @tipePembayaran untuk metode pembayaran
+     * @metodePembayaran untuk metode pembayaran
      */
 
     public Reservasi(String passengerName, String rutePenerbangan, String setKelas, double harga,
@@ -255,7 +255,7 @@ public class AirlineReservationSystem {
                     kelasTersedia[indeksPenerbangan][indeksKelas]--;
 
                     System.out.printf(
-                            "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Tipe Pembayaran: %s",
+                            "\n\n\t Tiket berhasil dipesan atas Nama: %s \n\t Rute Penerbangan: %s \n\t Kelas: %s \n\t Harga Tiket One-Way Rp.%,.2f \n\t Metode Pembayaran: %s",
                             name, rutePenerbangan[indeksPenerbangan], kelasPenerbangan(pilihKelas), harga,
                             metodePembayaran);
                     System.out.println("\n");
@@ -521,6 +521,10 @@ public class AirlineReservationSystem {
 
     // Method untuk memproses pembayaran
 
+    /**
+     * 
+     * @param pilihanPembayaran pilihan pembayaran yang disediakan Maskapai
+     */
     public static String metodePembayaran(int pilihanPembayaran) {
         switch (pilihanPembayaran) {
             case 1:
@@ -536,6 +540,10 @@ public class AirlineReservationSystem {
         }
     }
 
+    /**
+     * @param amount besaran biaya di masing-masing Metode Pembayaran
+     * @pilihPembayaran Pemesan memilih metode Pembayaran
+     */
     public static int prosesPembayaran(double amount) throws InterruptedException {
         System.out.println();
         System.out.println(">> Pilih Tipe Pembayaran:\n");
@@ -568,6 +576,12 @@ public class AirlineReservationSystem {
         return pilihPembayaran;
     }
 
+    /**
+     * 
+     * @param amount besaran biaya di masing-masing Metode Pembayaran
+     * @creditCard nomor kartu Kredit Pemesan
+     * @nb catatan yang bisa di inputkan Pemesan
+     */
     @SuppressWarnings("unused")
     public static void processCreditCardPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan nomor kartu kredit: ");
@@ -575,8 +589,8 @@ public class AirlineReservationSystem {
         System.out.print("Masukkan Catatan: ");
         String nb = input.nextLine();
         // Memproses pembayaran dengan Kartu Kredit
-        System.out.printf("Memproses pembayaran sebesar Rp %,.2f menggunakan kartu Kredit kepada Pihak Maskapai",
-                amount);
+        System.out.printf("Memproses pembayaran sebesar Rp %,.2f dari nomor kartu Kredit: %s kepada Pihak Maskapai",
+                amount, creditCard);
         System.out.println();
         for (int i = 0; i < 70; i++) {
             System.out.print("|");
@@ -585,6 +599,12 @@ public class AirlineReservationSystem {
         System.out.println("\n\t\t Pembayaran berhasil!");
     }
 
+    /**
+     * 
+     * @param amount besaran biaya di masing-masing Metode Pembayaran
+     * @debitCard nomor kartu Debit pemesan
+     * @nb catatan yang dapat di inputkan Pemesan
+     */
     @SuppressWarnings("unused")
     public static void processDebitCardPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan nomor kartu debit: ");
@@ -592,8 +612,8 @@ public class AirlineReservationSystem {
         System.out.print("Masukkan Catatan: ");
         String nb = input.nextLine();
         // Memproses pembayaran dengan Kartu Debit
-        System.out.printf("Memproses pembayaran sebesar Rp %,.2f menggunakan kartu Debit kepada Pihak Maskapai",
-                amount);
+        System.out.printf("Memproses pembayaran sebesar Rp %,.2f dari nomor kartu Debit: %s kepada Pihak Maskapai",
+                amount, debitCard);
         System.out.println();
         for (int i = 0; i < 70; i++) {
             System.out.print("|");
@@ -602,6 +622,11 @@ public class AirlineReservationSystem {
         System.out.println("\n\t\t Pembayaran berhasil!");
     }
 
+    /**
+     * 
+     * @param amount besaran biaya di masing-masing Metode Pembayaran
+     * @accountNumber nomor Rekening dari Pemesan
+     */
     public static void processBankTransfer(double amount) throws InterruptedException {
         System.out.print("Masukkan nomor rekening: ");
         String accountNumber = input.nextLine();
@@ -616,12 +641,18 @@ public class AirlineReservationSystem {
         System.out.println("\n\t\t Transfer berhasil!");
     }
 
+    /**
+     * 
+     * @param amount besaran biaya di masing-masing Metode Pembayaran
+     * @ewalletId ID E-wallet dari Pemesan
+     */
     @SuppressWarnings("unused")
     public static void processEWalletPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan ID E-Wallet: ");
         String ewalletId = input.nextLine();
         // Memproses pembayaran dengan E-Wallet
-        System.out.printf("Memproses pembayaran sebesar Rp %,.2f menggunakan E-Wallet kepada Pihak Maskapai", amount);
+        System.out.printf("Memproses pembayaran sebesar Rp %,.2f dari ID E-Wallet: %s kepada Pihak Maskapai", amount,
+                ewalletId);
         System.out.println();
         for (int i = 0; i < 70; i++) {
             System.out.print("|");
