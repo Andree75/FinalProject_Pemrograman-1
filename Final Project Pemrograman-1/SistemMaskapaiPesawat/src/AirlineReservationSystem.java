@@ -136,7 +136,12 @@ public class AirlineReservationSystem {
         }
     }
 
-    // Method untuk menampilkan menu utama
+    
+    /**
+     * @showMenu jadi methods ini untuk menampilkan menu utama pada aplikas ini
+     * 
+     * @throws InterruptedException
+     */
     public static void showMenu() throws InterruptedException {
 
         System.out.println("+==================================================================+");
@@ -154,7 +159,10 @@ public class AirlineReservationSystem {
         System.out.print(" Silahkan Pilih opsi: ");
     }
 
-    // Method untuk menampilkan daftar penerbangan
+    
+    /**
+     * @showFlights methods ini untuk menampilkan semua daftar penergangan
+     */
     public static void showFlights() {
         System.out.println();
         System.out.println(
@@ -175,9 +183,11 @@ public class AirlineReservationSystem {
         }
     }
 
-    // Method untuk mencari penerbangan berdasarkan tujuan
+    
     /**
      * @found untuk menentukan dan menemukan Tipe kelas
+     * @searchFlights methods ini untuk mencari rute penerbangan bedasarkan nama atau pun tujuan
+     *   
      */
     public static void searchFlights() {
         System.out.println();
@@ -283,7 +293,7 @@ public class AirlineReservationSystem {
         }
     }
 
-    // Method untuk membatalkan tiket
+    
     /**
      * @name nama Pemesan yang telah diinputkan
      * @found kondisi untuk menemukan dan menampilkan detail tentang pembatalan
@@ -332,6 +342,10 @@ public class AirlineReservationSystem {
     }
 
     // Method untuk menampilkan daftar pemesan
+    /**
+     * @showBookings methods untuk menampilkan daftar booking yang sudah di pesan
+     *  
+     */
     public static void showBookings() {
         System.out.println();
         System.out.println(
@@ -366,7 +380,7 @@ public class AirlineReservationSystem {
 
     // Method untuk mendapatkan nama kelas berdasarkan indeks
     /**
-     * @param classChoice Pilihan Kelas
+     * @param classChoice untuk memilih bangku sesuai kelas
      *                    1. First Class
      *                    2. Bisnis
      *                    3. Ekonomi
@@ -539,6 +553,7 @@ public class AirlineReservationSystem {
     /**
      * 
      * @param pilihanPembayaran pilihan pembayaran yang disediakan Maskapai
+     * 
      */
     public static String metodePembayaran(int pilihanPembayaran) {
         switch (pilihanPembayaran) {
