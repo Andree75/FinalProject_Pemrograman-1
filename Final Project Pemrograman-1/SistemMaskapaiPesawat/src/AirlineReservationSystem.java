@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 class Reservasi {
-    String passengerName;
+    String name;
     String rutePenerbangan;
     String setKelas;
     double harga;
@@ -16,10 +16,10 @@ class Reservasi {
      * @metodePembayaran untuk metode pembayaran
      */
 
-    public Reservasi(String passengerName, String rutePenerbangan, String setKelas, double harga,
+    public Reservasi(String name, String rutePenerbangan, String setKelas, double harga,
             String metodePembayaran, String tanggalKeberangkatan) {
 
-        this.passengerName = passengerName;
+        this.name = name;
         this.rutePenerbangan = rutePenerbangan;
         this.setKelas = setKelas;
         this.harga = harga;
@@ -29,16 +29,13 @@ class Reservasi {
     }
 
     /**
-     * @everride untuk mengambil variabel yang di deklarasikan dari class utama
-     * 
      * @String.format untuk mengembalikan/menampilkan nilai variabel yang telah di
      *                deklarasikan
      */
-    @Override
     public String toString() {
         return String.format(
                 "Nama: %s | Penerbangan: %s | tanggal Keberangkatan: %s| Kelas: %s | Harga: Rp%,.2f \n\t | Metode Pembayaran dengan %s",
-                passengerName, rutePenerbangan, tanggalKeberangkatan,
+                name, rutePenerbangan, tanggalKeberangkatan,
                 setKelas,
                 harga, metodePembayaran);
     }
@@ -136,7 +133,6 @@ public class AirlineReservationSystem {
         }
     }
 
-    
     /**
      * @showMenu jadi methods ini untuk menampilkan menu utama pada aplikas ini
      * 
@@ -159,7 +155,6 @@ public class AirlineReservationSystem {
         System.out.print(" Silahkan Pilih opsi: ");
     }
 
-    
     /**
      * @showFlights methods ini untuk menampilkan semua daftar penergangan
      */
@@ -183,11 +178,11 @@ public class AirlineReservationSystem {
         }
     }
 
-    
     /**
      * @found untuk menentukan dan menemukan Tipe kelas
-     * @searchFlights methods ini untuk mencari rute penerbangan bedasarkan nama atau pun tujuan
-     *   
+     * @searchFlights methods ini untuk mencari rute penerbangan bedasarkan nama
+     *                atau pun tujuan
+     * 
      */
     public static void searchFlights() {
         System.out.println();
@@ -293,7 +288,6 @@ public class AirlineReservationSystem {
         }
     }
 
-    
     /**
      * @name nama Pemesan yang telah diinputkan
      * @found kondisi untuk menemukan dan menampilkan detail tentang pembatalan
@@ -320,7 +314,7 @@ public class AirlineReservationSystem {
                 for (int k = 0; k < reservasiUser[i].length; k++) {
                     for (int l = 0; l < reservasiUser[i][k].length; l++) {
                         if (reservasiUser[i][k][l] != null
-                                && reservasiUser[i][k][l].passengerName.equalsIgnoreCase(name)) {
+                                && reservasiUser[i][k][l].name.equalsIgnoreCase(name)) {
                             System.out.println(
                                     "\n\nTiket atas nama " + name + " | Rute penerbangan " + rutePenerbangan[i]
                                             + " | kelas " + kelasPenerbangan(k + 1) + " | Waktu Keberangkatan "
@@ -344,7 +338,7 @@ public class AirlineReservationSystem {
     // Method untuk menampilkan daftar pemesan
     /**
      * @showBookings methods untuk menampilkan daftar booking yang sudah di pesan
-     *  
+     * 
      */
     public static void showBookings() {
         System.out.println();
@@ -489,7 +483,6 @@ public class AirlineReservationSystem {
      * 
      * @throws InterruptedException
      */
-    @SuppressWarnings("resource")
     public static void Login() throws InterruptedException {
 
         Scanner input = new Scanner(System.in);
@@ -583,7 +576,7 @@ public class AirlineReservationSystem {
         System.out.println("4. E-Wallet\n");
         System.out.print("Pilih metode pembayaran: ");
         int pilihPembayaran = input.nextInt();
-        input.nextLine(); // Clear the newline
+        input.nextLine();
 
         switch (pilihPembayaran) {
             case 1:
@@ -610,14 +603,10 @@ public class AirlineReservationSystem {
      * 
      * @param amount besaran biaya di masing-masing Metode Pembayaran
      * @creditCard nomor kartu Kredit Pemesan
-     * @nb catatan yang bisa di inputkan Pemesan
      */
-    @SuppressWarnings("unused")
     public static void processCreditCardPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan nomor kartu kredit: ");
         String creditCard = input.nextLine();
-        System.out.print("Masukkan Catatan: ");
-        String nb = input.nextLine();
         // Memproses pembayaran dengan Kartu Kredit
         System.out.printf("Memproses pembayaran sebesar Rp %,.2f dari nomor kartu Kredit: %s kepada Pihak Maskapai",
                 amount, creditCard);
@@ -633,14 +622,10 @@ public class AirlineReservationSystem {
      * 
      * @param amount besaran biaya di masing-masing Metode Pembayaran
      * @debitCard nomor kartu Debit pemesan
-     * @nb catatan yang dapat di inputkan Pemesan
      */
-    @SuppressWarnings("unused")
     public static void processDebitCardPayment(double amount) throws InterruptedException {
         System.out.print("Masukkan nomor kartu debit: ");
         String debitCard = input.nextLine();
-        System.out.print("Masukkan Catatan: ");
-        String nb = input.nextLine();
         // Memproses pembayaran dengan Kartu Debit
         System.out.printf("Memproses pembayaran sebesar Rp %,.2f dari nomor kartu Debit: %s kepada Pihak Maskapai",
                 amount, debitCard);
