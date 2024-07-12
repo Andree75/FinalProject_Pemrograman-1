@@ -59,7 +59,6 @@ public class AirlineReservationSystem {
     /**
      * @kelasTersedia untuk menyimpan data kursi perkelas yang tersedia di masing2
      *                rute penerbangan
-     * 
      */
     static int[][] kelasTersedia = { { 2, 4, 5 }, { 3, 6, 6 }, { 3, 2, 6 }, { 2, 5, 5 }, { 3, 5, 6 },
             { 1, 3, 6 }, { 2, 6, 5 }, { 2, 1, 6 }, { 3, 4, 5 }, { 0, 1, 6 }, { 0, 2, 5 }, { 0, 3, 0 },
